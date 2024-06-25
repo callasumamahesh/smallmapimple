@@ -15,7 +15,7 @@ const customIcon = new L.Icon({
 });
 
 function Map({ coordinates }) {
-  console.log('Good',coordinates)
+  console.log(coordinates);
   return (
     <section className='w-[100%] flex justify-center items-center'>
       <MapContainer center={[17.4486, 78.3908]} zoom={10} className='h-[50vh] w-1/2 mt-4'>
@@ -26,17 +26,18 @@ function Map({ coordinates }) {
 
         {coordinates.map((coord, index) => {
           return  <LocationMarker
-          key={index}
-          position={[coord.latitude, coord.longitude]}
-          location={coord.location}
-        />
+            key={index}
+            position={[coord.latitude, coord.longitude]}
+            location={coord.location}
+            direction={coord.direction}
+          />
         })}
       </MapContainer>
     </section>
   );
 }
 
-function LocationMarker({ position, location }) {
+function LocationMarker({ position, location, direction }) {
   const map = useMap();
 
   const handleClick = () => {
@@ -52,7 +53,7 @@ function LocationMarker({ position, location }) {
       }}
     >
       <Popup>
-        {location}
+        {direction}
       </Popup>
     </Marker>
   );

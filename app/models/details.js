@@ -13,11 +13,10 @@ const detailsSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  // direction:{
-  //   type:String,
-  //   required:true
-  // }
-
+  direction: {
+    type: String,
+    required: true
+  }
 });
 
 const userLocation = mongoose.models.userLocation || mongoose.model('userLocation', detailsSchema);
