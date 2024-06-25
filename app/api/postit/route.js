@@ -17,13 +17,3 @@ export async function POST(req) {
   }
 }
 
-export async function GET(req) {
-  await connectToDatabase();
-  try {
-    const data = await userLocation.find({});
-    return NextResponse.json({ data }, { status: 200 });
-  } catch (error) {
-    console.error('Error fetching data from database:', error);
-    return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
-  }
-}

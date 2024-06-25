@@ -102,6 +102,7 @@ function Page() {
               onClick={() => handleCamera(index)}
             >
               {detail.image && <img src={detail.image} alt="Captured" className='w-full h-full object-cover' />}
+              <p>{details.direction}</p>
             </div>
           ))}
         </div>
