@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const mongo_url = 'mongodb+srv://umamahesh:mapimplementation@cluster0.cxy5imj.mongodb.net/mi?retryWrites=true&w=majority&appName=Cluster0';
+const mongo_url = process.env.mongodb_url;
 const connectToDatabase = async () => {
     try {
         await mongoose.connect(mongo_url,{
