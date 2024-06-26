@@ -18,7 +18,7 @@ function Map({ coordinates }) {
   console.log(coordinates);
   return (
     <section className='w-[100%] flex justify-center items-center'>
-      <MapContainer center={[17.4486, 78.3908]} zoom={10} className='h-[50vh] w-1/2 mt-4'>
+      <MapContainer center={[17.4486, 78.3908]} zoom={10} className='h-[50vh] w-[90%] mt-4'>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
