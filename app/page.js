@@ -206,8 +206,11 @@ function Page() {
     setCameraOpen(true);
   };
 
+  // console.log(mapdetails);
+
   useEffect(() => {
     if (mapdetails.length > 2) {
+      console.log('good');
       const calculatedArea = calculateArea(mapdetails);
       setArea(calculatedArea);
     }
@@ -227,13 +230,16 @@ function Page() {
       longitude = position.coords.longitude;
     }
 
-    setDetails(prevDetails => {
-      const newDetails = [...prevDetails];
-      newDetails[activeIndex].image = imageSrc;
-      newDetails[activeIndex].latitude = latitude;
-      newDetails[activeIndex].longitude = longitude;
-      return newDetails;
-    });
+    const newDetails = [...details];
+    newDetails[activeIndex].image = imageSrc;
+    newDetails[activeIndex].latitude = latitude;
+    newDetails[activeIndex].longitude = longitude;
+
+    setDetails(newDetails);
+    setMapDetails(prevMapDetails => [
+      ...prevMapDetails,
+      newDetails[activeIndex]
+    ]);
 
     setCameraOpen(false);
     setCapturing(false);
@@ -263,7 +269,6 @@ function Page() {
   };
 
   const handleMap = () => {
-    setMapDetails(details.filter(detail => detail.latitude && detail.longitude));
     setShowMap(!showMap);
   };
 
@@ -295,10 +300,10 @@ function Page() {
         </div>
         <br></br>
         <div className='flex gap-2'>
-          <button onClick={() => handleMap()} className='w-[100px] h-[40px] bg-blue-600 rounded-[10px] text-white'>
+          <button onClick={handleMap} className='w-[100px] h-[40px] bg-blue-600 rounded-[10px] text-white'>
             Get Map
           </button>
-          <input type='text' placeholder='area' className='border-2 border-black-600 w-[150px] rounded-[10px] pl-4 pr-4 pt-2 pb-2' value={area} readOnly/>
+          <input type='text' placeholder='area' className='border-2 border-black-600 w-[150px] rounded-[10px] pl-4 pr-4 pt-2 pb-2' value={area} readOnly /> Sq Meters
         </div>
       </div>
       {cameraOpen && (

@@ -25,6 +25,7 @@ function Map({ coordinates }) {
         />
 
         {coordinates.map((coord, index) => {
+          // console.log(coord.direction)
           return  <LocationMarker
             key={index}
             position={[coord.latitude, coord.longitude]}
