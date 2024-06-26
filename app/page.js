@@ -210,7 +210,7 @@ function Page() {
 
   useEffect(() => {
     if (mapdetails.length > 2) {
-      console.log('good');
+      // console.log('good');
       const calculatedArea = calculateArea(mapdetails);
       setArea(calculatedArea);
     }
