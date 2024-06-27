@@ -201,20 +201,30 @@ function Page() {
   const [area, setArea] = useState(0);
   const [isFrontCamera, setIsFrontCamera] = useState(true);
 
+//   let coordinates1 = [{latitude:17.4486,longitude:78.3908,direction:'East'},
+// {latitude:17.4401,longitude:'78.3489',direction:'West'},
+// {latitude:17.4435,longitude:'78.3772',direction:'North'}]
+
+
   const handleCamera = (index) => {
     setActiveIndex(index);
     setCameraOpen(true);
   };
 
-  // console.log(mapdetails);
-
   useEffect(() => {
     if (mapdetails.length > 2) {
-      // console.log('good');
       const calculatedArea = calculateArea(mapdetails);
       setArea(calculatedArea);
     }
   }, [mapdetails]);
+
+  // useEffect(() => {
+  //   if (coordinates1.length > 2) {
+  //     const calculatedArea = calculateArea(coordinates1);
+  //     setArea(calculatedArea);
+  //   }
+  // }, [coordinates1]);
+
 
   const capturePhoto = async () => {
     setCapturing(true);
@@ -238,7 +248,7 @@ function Page() {
     setDetails(newDetails);
     setMapDetails(prevMapDetails => [
       ...prevMapDetails,
-      newDetails[activeIndex]
+      { latitude, longitude, direction: newDetails[activeIndex].direction }
     ]);
 
     setCameraOpen(false);
@@ -260,11 +270,10 @@ function Page() {
     for (let i = 0; i < radianCoordinates.length; i++) {
       const { lat: lat1, lon: lon1 } = radianCoordinates[i];
       const { lat: lat2, lon: lon2 } = radianCoordinates[(i + 1) % radianCoordinates.length];
-
       area += lon1 * Math.sin(lat2) - lon2 * Math.sin(lat1);
     }
     area = Math.abs((area * earthRadius * earthRadius) / 2);
-    area *= 1000000;
+    area *= 1000000; // Multiply by 1,000,000 to convert square kilometers to square meters
     return area;
   };
 
